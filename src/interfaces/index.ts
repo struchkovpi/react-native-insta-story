@@ -10,7 +10,7 @@ export type NextOrPrevious = 'next' | 'previous';
 
 export interface IUserStory<T = Record<string, any>> {
   user_id: number;
-  user_image: string | undefined;
+  user_image?: string | undefined;
   user_name: string;
   stories: IUserStoryItem<T>[];
   /** INTERNAL USE ONLY */
@@ -110,7 +110,7 @@ export interface StoryListItemProps {
   /** Name of the user - IUserStory.user_name */
   profileName: string;
   /** Profile picture of the user - IUserStory.user_image */
-  profileImage: string | undefined;
+  profileImage?: string | undefined;
   /** Time in seconds */
   duration: number;
   /** Text of the swipe up button */
@@ -231,4 +231,5 @@ export interface StoryProps {
   storyAvatarImageStyle?: ImageStyle;
   /** Custom styles for the main story item container */
   storyContainerStyle?: ViewStyle;
+  isVisible?:boolean;
 }

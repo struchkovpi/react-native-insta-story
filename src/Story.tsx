@@ -1,12 +1,12 @@
-import React, { Fragment, useRef, useState, useEffect } from 'react';
-import { Dimensions, View, Platform, StyleSheet } from 'react-native';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
+import { Dimensions, Platform, StyleSheet, View } from 'react-native';
 import Modal from 'react-native-modalbox';
 
-import StoryListItem from './StoryListItem';
 import StoryCircleListView from './StoryCircleListView';
-import { isNullOrWhitespace } from './helpers';
+import StoryListItem from './StoryListItem';
 import AndroidCubeEffect from './components/AndroidCubeEffect';
 import CubeNavigationHorizontal from './components/CubeNavigationHorizontal';
+import { isNullOrWhitespace } from './helpers';
 import { IUserStory, NextOrPrevious, StoryProps } from './interfaces';
 
 const { height, width } = Dimensions.get('window');
@@ -39,6 +39,7 @@ export const Story = ({
   avatarImageStyle,
   avatarWrapperStyle,
   avatarFlatListProps,
+  isVisible,
 }: StoryProps) => {
   const [dataState, setDataState] = useState<IUserStory[]>(data);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -57,6 +58,12 @@ export const Story = ({
     setSelectedData(newData);
     setIsModalOpen(true);
   };
+
+useEffect(() => {
+  if (dataState && dataState.length > 0 && isVisible) {
+  _handleStoryItemPress(dataState[0], 0)
+  }
+}, [isVisible, dataState])
 
   useEffect(() => {
     handleSeen();
@@ -213,7 +220,3 @@ const styles = StyleSheet.create({
 });
 
 export default Story;
-
-Story.defaultProps = {
-  showAvatarText: true,
-};

@@ -1,20 +1,20 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
-  Animated,
-  Image,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Dimensions,
-  TouchableWithoutFeedback,
   ActivityIndicator,
-  View,
+  Animated,
+  Dimensions,
+  Image,
   Platform,
   SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
 } from 'react-native';
 import GestureRecognizer from 'react-native-swipe-gestures';
 
-import { usePrevious, isNullOrWhitespace } from './helpers';
+import { isNullOrWhitespace, usePrevious } from './helpers';
 import {
   IUserStoryItem,
   NextOrPrevious,
@@ -209,11 +209,12 @@ export const StoryListItem = ({
     >
       <SafeAreaView>
         <View style={styles.backgroundContainer}>
+          {content[current].story_image && 
           <Image
             onLoadEnd={() => start()}
             source={{ uri: content[current].story_image }}
             style={[styles.image, storyImageStyle]}
-          />
+          />}
           {load && (
             <View style={styles.spinnerContainer}>
               <ActivityIndicator size="large" color={'white'} />
@@ -333,10 +334,6 @@ export const StoryListItem = ({
 
 export default StoryListItem;
 
-StoryListItem.defaultProps = {
-  duration: 10000,
-};
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -356,7 +353,7 @@ const styles = StyleSheet.create({
   image: {
     width: width,
     height: height,
-    resizeMode: 'cover',
+    resizeMode: 'contain',
   },
   backgroundContainer: {
     position: 'absolute',
