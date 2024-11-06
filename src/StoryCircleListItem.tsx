@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
-  View,
   Image,
-  TouchableOpacity,
-  Text,
   StyleSheet,
-  Platform,
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native';
 
 import { usePrevious } from './helpers/StateHelpers';
 import { IUserStory, StoryCircleListItemProps } from './interfaces';
 
-import DEFAULT_AVATAR from './assets/images/no_avatar.png';
 
 const StoryCircleListItem = ({
   item,
@@ -64,7 +62,7 @@ const StoryCircleListItem = ({
                 borderColor: pressedBorderColor ?? 'grey',
               },
         ]}
-      >
+      >{item.user_image !== null && item.user_image !== undefined &&
         <Image
           style={[
             {
@@ -75,8 +73,7 @@ const StoryCircleListItem = ({
             avatarImageStyle,
           ]}
           source={{ uri: item.user_image }}
-          defaultSource={Platform.OS === 'ios' ? DEFAULT_AVATAR : null}
-        />
+        />}
       </TouchableOpacity>
       {showText && (
         <Text

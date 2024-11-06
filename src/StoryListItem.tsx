@@ -209,7 +209,7 @@ export const StoryListItem = ({
     >
       <SafeAreaView>
         <View style={styles.backgroundContainer}>
-          {content[current].story_image && 
+          {content[current].story_image !== null && content[current].story_image !== undefined && 
           <Image
             onLoadEnd={() => start()}
             source={{ uri: content[current].story_image }}
@@ -248,10 +248,11 @@ export const StoryListItem = ({
         </View>
         <View style={[styles.userContainer, storyUserContainerStyle]}>
           <View style={styles.flexRowCenter}>
+            {profileImage !== null && profileImage !== undefined &&
             <Image
               style={[styles.avatarImage, storyAvatarImageStyle]}
               source={{ uri: profileImage }}
-            />
+            />}
             {typeof renderTextComponent === 'function' ? (
               renderTextComponent({
                 item: content[current],
@@ -269,6 +270,7 @@ export const StoryListItem = ({
               })
             ) : (
               <TouchableOpacity
+                hitSlop={{top: 50, bottom: 50, left: 50, right: 50}}
                 onPress={() => {
                   if (onClosePress) {
                     onClosePress();
