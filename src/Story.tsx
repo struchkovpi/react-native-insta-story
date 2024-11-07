@@ -176,7 +176,7 @@ useEffect(() => {
       );
     }
   };
-
+  
   return (
     <Fragment>
       <View style={style}>
@@ -196,6 +196,8 @@ useEffect(() => {
         />
       </View>
       <Modal
+        hardwareAccelerated
+        statusBarTranslucent
         style={styles.modal}
         isOpen={isModalOpen}
         onClosed={() => setIsModalOpen(false)}
@@ -203,7 +205,6 @@ useEffect(() => {
         swipeToClose
         swipeArea={250}
         backButtonClose
-        coverScreen={true}
       >
         {renderCube()}
       </Modal>
