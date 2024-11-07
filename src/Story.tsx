@@ -200,7 +200,12 @@ useEffect(() => {
         statusBarTranslucent
         style={styles.modal}
         isOpen={isModalOpen}
-        onClosed={() => setIsModalOpen(false)}
+        onClosed={() => {
+          setIsModalOpen(false)
+          if (onClose) {
+            onClose();
+          }
+        }}
         position="center"
         swipeToClose
         swipeArea={250}
