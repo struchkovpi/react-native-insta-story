@@ -90,6 +90,11 @@ export const StoryListItem = ({
 
   useEffect(() => {
     if (!isNullOrWhitespace(prevCurrent)) {
+      if (content[current].story_image === undefined)
+        {
+          start()
+          return;
+        }
       if (prevCurrent) {
         if (
           current > prevCurrent &&
@@ -271,6 +276,7 @@ export const StoryListItem = ({
             ) : (
               <TouchableOpacity
                 hitSlop={{top: 50, bottom: 50, left: 50, right: 50}}
+                style={styles.xButton}
                 onPress={() => {
                   if (onClosePress) {
                     onClosePress();
@@ -425,4 +431,7 @@ const styles = StyleSheet.create({
     color: 'white',
     marginTop: 5,
   },
+  xButton: {
+    backgroundColor: 'rgba(0,0,0,0.3)', paddingHorizontal: 10, paddingVertical: 6
+  }
 });
