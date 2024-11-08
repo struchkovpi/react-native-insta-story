@@ -432,6 +432,9 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   xButton: {
-    backgroundColor: 'rgba(0,0,0,0.3)', paddingHorizontal: 10, paddingVertical: 6
+    backgroundColor: 'rgba(0,0,0,0.3)', 
+    paddingHorizontal: 10, 
+    paddingVertical: 6, 
+    borderRadius: 10
   }
 });
