@@ -1,15 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { usePrevious } from './helpers/StateHelpers';
 import { IUserStory, StoryCircleListItemProps } from './interfaces';
-
 
 const StoryCircleListItem = ({
   item,
@@ -62,18 +55,20 @@ const StoryCircleListItem = ({
                 borderColor: pressedBorderColor ?? 'grey',
               },
         ]}
-      >{item.user_image !== null && item.user_image !== undefined &&
-        <Image
-          style={[
-            {
-              height: avatarSize,
-              width: avatarSize,
-              borderRadius: 100,
-            },
-            avatarImageStyle,
-          ]}
-          source={{ uri: item.user_image }}
-        />}
+      >
+        {item.user_image !== null && item.user_image !== undefined && (
+          <Image
+            style={[
+              {
+                height: avatarSize,
+                width: avatarSize,
+                borderRadius: 100,
+              },
+              avatarImageStyle,
+            ]}
+            source={{ uri: item.user_image }}
+          />
+        )}
       </TouchableOpacity>
       {showText && (
         <Text

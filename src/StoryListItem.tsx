@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 import GestureRecognizer from 'react-native-swipe-gestures';
 
+import { BlurView } from '@react-native-community/blur';
 import { isNullOrWhitespace, usePrevious } from './helpers';
 import {
   IUserStoryItem,
@@ -90,11 +91,10 @@ export const StoryListItem = ({
 
   useEffect(() => {
     if (!isNullOrWhitespace(prevCurrent)) {
-      if (content[current].story_image === undefined)
-        {
-          start()
-          return;
-        }
+      if (content[current].story_image === undefined) {
+        start();
+        return;
+      }
       if (prevCurrent) {
         if (
           current > prevCurrent &&
@@ -214,12 +214,26 @@ export const StoryListItem = ({
     >
       <SafeAreaView>
         <View style={styles.backgroundContainer}>
-          {content[current].story_image !== null && content[current].story_image !== undefined && 
-          <Image
-            onLoadEnd={() => start()}
-            source={{ uri: content[current].story_image }}
-            style={[styles.image, storyImageStyle]}
-          />}
+          {content[current].story_image !== null &&
+            content[current].story_image !== undefined && (
+              <>
+                <Image
+                  source={{ uri: content[current].story_image }}
+                  style={[styles.imageBlur]}
+                />
+                <BlurView
+                  style={styles.absolute}
+                  blurType="light"
+                  blurAmount={10}
+                  reducedTransparencyFallbackColor="white"
+                />
+                <Image
+                  onLoadEnd={() => start()}
+                  source={{ uri: content[current].story_image }}
+                  style={[styles.image, storyImageStyle]}
+                />
+              </>
+            )}
           {load && (
             <View style={styles.spinnerContainer}>
               <ActivityIndicator size="large" color={'white'} />
@@ -253,11 +267,12 @@ export const StoryListItem = ({
         </View>
         <View style={[styles.userContainer, storyUserContainerStyle]}>
           <View style={styles.flexRowCenter}>
-            {profileImage !== null && profileImage !== undefined &&
-            <Image
-              style={[styles.avatarImage, storyAvatarImageStyle]}
-              source={{ uri: profileImage }}
-            />}
+            {profileImage !== null && profileImage !== undefined && (
+              <Image
+                style={[styles.avatarImage, storyAvatarImageStyle]}
+                source={{ uri: profileImage }}
+              />
+            )}
             {typeof renderTextComponent === 'function' ? (
               renderTextComponent({
                 item: content[current],
@@ -275,7 +290,7 @@ export const StoryListItem = ({
               })
             ) : (
               <TouchableOpacity
-                hitSlop={{top: 50, bottom: 50, left: 50, right: 50}}
+                hitSlop={{ top: 50, bottom: 50, left: 50, right: 50 }}
                 style={styles.xButton}
                 onPress={() => {
                   if (onClosePress) {
@@ -363,6 +378,11 @@ const styles = StyleSheet.create({
     height: height,
     resizeMode: 'contain',
   },
+  imageBlur: {
+    width: width,
+    height: height,
+    resizeMode: 'cover',
+  },
   backgroundContainer: {
     position: 'absolute',
     top: 0,
@@ -432,9 +452,16 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   xButton: {
-    backgroundColor: 'rgba(0,0,0,0.3)', 
-    paddingHorizontal: 10, 
-    paddingVertical: 6, 
-    borderRadius: 10
-  }
+    backgroundColor: 'rgba(0,0,0,0.3)',
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    borderRadius: 10,
+  },
+  absolute: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+  },
 });
