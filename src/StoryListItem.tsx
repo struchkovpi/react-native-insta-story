@@ -14,7 +14,6 @@ import {
 } from 'react-native';
 import GestureRecognizer from 'react-native-swipe-gestures';
 
-import { BlurView } from '@react-native-community/blur';
 import { isNullOrWhitespace, usePrevious } from './helpers';
 import {
   IUserStoryItem,
@@ -218,14 +217,9 @@ export const StoryListItem = ({
             content[current].story_image !== undefined && (
               <>
                 <Image
+                  blurRadius={50}
                   source={{ uri: content[current].story_image }}
                   style={[styles.imageBlur]}
-                />
-                <BlurView
-                  style={styles.absolute}
-                  blurType="light"
-                  blurAmount={10}
-                  reducedTransparencyFallbackColor="white"
                 />
                 <Image
                   onLoadEnd={() => start()}
@@ -382,6 +376,7 @@ const styles = StyleSheet.create({
     width: width,
     height: height,
     resizeMode: 'cover',
+    position: 'absolute',
   },
   backgroundContainer: {
     position: 'absolute',
