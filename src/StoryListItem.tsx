@@ -258,6 +258,24 @@ export const StoryListItem = ({
               </View>
             );
           })}
+          {typeof renderCloseComponent === 'function' ? (
+            renderCloseComponent({
+              onPress: onClosePress,
+              item: content[current],
+            })
+          ) : (
+            <TouchableOpacity
+              hitSlop={{ top: 50, bottom: 50, left: 50, right: 50 }}
+              style={styles.xButton}
+              onPress={() => {
+                if (onClosePress) {
+                  onClosePress();
+                }
+              }}
+            >
+              <Text style={styles.whiteText}>×</Text>
+            </TouchableOpacity>
+          )}
         </View>
         <View style={[styles.userContainer, storyUserContainerStyle]}>
           <View style={styles.flexRowCenter}>
@@ -274,26 +292,6 @@ export const StoryListItem = ({
               })
             ) : (
               <Text style={styles.avatarText}>{profileName}</Text>
-            )}
-          </View>
-          <View style={styles.closeIconContainer}>
-            {typeof renderCloseComponent === 'function' ? (
-              renderCloseComponent({
-                onPress: onClosePress,
-                item: content[current],
-              })
-            ) : (
-              <TouchableOpacity
-                hitSlop={{ top: 50, bottom: 50, left: 50, right: 50 }}
-                style={styles.xButton}
-                onPress={() => {
-                  if (onClosePress) {
-                    onClosePress();
-                  }
-                }}
-              >
-                <Text style={styles.whiteText}>X</Text>
-              </TouchableOpacity>
             )}
           </View>
         </View>
@@ -395,9 +393,10 @@ const styles = StyleSheet.create({
     height: height,
   },
   animationBarContainer: {
+    alignItems: 'center',
     flexDirection: 'row',
-    paddingTop: 10,
     paddingHorizontal: 10,
+    gap: 3,
   },
   animationBackground: {
     height: 2,
@@ -440,17 +439,17 @@ const styles = StyleSheet.create({
     bottom: Platform.OS == 'ios' ? 20 : 50,
   },
   whiteText: {
-    color: 'white',
+    color: 'rgb(70,70,70)',
+    fontSize: 35,
   },
   swipeText: {
     color: 'white',
     marginTop: 5,
   },
   xButton: {
-    backgroundColor: 'rgba(0,0,0,0.3)',
-    paddingHorizontal: 10,
-    paddingVertical: 6,
+    paddingLeft: 7,
     borderRadius: 10,
+    paddingBottom: 5,
   },
   absolute: {
     position: 'absolute',
