@@ -34,6 +34,7 @@ export const Story = ({
   animationBarContainerStyle,
   storyUserContainerStyle,
   storyImageStyle,
+  storyImageBlurStyle,
   storyAvatarImageStyle,
   storyContainerStyle,
   avatarImageStyle,
@@ -59,11 +60,11 @@ export const Story = ({
     setIsModalOpen(true);
   };
 
-useEffect(() => {
-  if (dataState && dataState.length > 0 && isVisible) {
-  _handleStoryItemPress(dataState[0], 0)
-  }
-}, [isVisible, dataState])
+  useEffect(() => {
+    if (dataState && dataState.length > 0 && isVisible) {
+      _handleStoryItemPress(dataState[0], 0);
+    }
+  }, [isVisible, dataState]);
 
   useEffect(() => {
     handleSeen();
@@ -141,6 +142,7 @@ useEffect(() => {
           loadedAnimationBarStyle={loadedAnimationBarStyle}
           storyUserContainerStyle={storyUserContainerStyle}
           storyImageStyle={storyImageStyle}
+          storyImageBlurStyle={storyImageBlurStyle}
           storyAvatarImageStyle={storyAvatarImageStyle}
           storyContainerStyle={storyContainerStyle}
         />
@@ -176,7 +178,7 @@ useEffect(() => {
       );
     }
   };
-  
+
   return (
     <Fragment>
       <View style={style}>
@@ -198,10 +200,10 @@ useEffect(() => {
       <Modal
         hardwareAccelerated
         statusBarTranslucent
-        style={styles.modal}
+        style={[styles.modal]}
         isOpen={isModalOpen}
         onClosed={() => {
-          setIsModalOpen(false)
+          setIsModalOpen(false);
           if (onClose) {
             onClose();
           }

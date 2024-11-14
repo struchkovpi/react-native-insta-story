@@ -43,6 +43,7 @@ export const StoryListItem = ({
   animationBarContainerStyle,
   storyUserContainerStyle,
   storyImageStyle,
+  storyImageBlurStyle,
   storyAvatarImageStyle,
   storyContainerStyle,
   ...props
@@ -219,7 +220,7 @@ export const StoryListItem = ({
                 <Image
                   blurRadius={50}
                   source={{ uri: content[current].story_image }}
-                  style={[styles.imageBlur]}
+                  style={[styles.imageBlur, storyImageBlurStyle]}
                 />
                 <Image
                   onLoadEnd={() => start()}

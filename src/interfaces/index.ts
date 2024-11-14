@@ -150,6 +150,7 @@ export interface StoryListItemProps {
   storyUserContainerStyle?: ViewStyle;
   /** Custom styles for the main story item image */
   storyImageStyle?: ImageStyle;
+  storyImageBlurStyle?: ImageStyle;
   /** Custom styles for the user avatar on the story item */
   storyAvatarImageStyle?: ImageStyle;
   /** Custom styles for the main story item container */
@@ -227,9 +228,10 @@ export interface StoryProps {
   storyUserContainerStyle?: ViewStyle;
   /** Custom styles for the main story item image */
   storyImageStyle?: ImageStyle;
+  storyImageBlurStyle?: ImageStyle;
   /** Custom styles for the user avatar on the story item */
   storyAvatarImageStyle?: ImageStyle;
   /** Custom styles for the main story item container */
   storyContainerStyle?: ViewStyle;
-  isVisible?:boolean;
+  isVisible?: boolean;
 }
