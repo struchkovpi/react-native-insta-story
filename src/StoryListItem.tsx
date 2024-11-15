@@ -101,14 +101,17 @@ export const StoryListItem = ({
           content[current - 1].story_image == content[current].story_image
         ) {
           start();
+          return;
         } else if (
           current < prevCurrent &&
           content[current + 1].story_image == content[current].story_image
         ) {
           start();
+          return;
         }
       }
     }
+    setLoad(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [current]);
 
@@ -174,7 +177,9 @@ export const StoryListItem = ({
       progress.setValue(0);
     } else {
       // the previous content is empty
-      close('previous');
+      progress.setValue(0);
+      start();
+      // close('previous');
     }
   }
 
